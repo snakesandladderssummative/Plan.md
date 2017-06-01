@@ -17,10 +17,10 @@
 
 ## My Goal
 * Create a working Snakes and Ladders program.
-* The program will include the game board and allow for two player to play, there will only be to players.
+* The program will include the game board and allow for two player to play, there will only be two players.
 * There will be a dice that roles 1-6 randomly and it will switch between player 1 and 2 everytime each player rolls the dice.
-* The board will show the players where they are by indicating it using certain letters and numbers.
-* The board will have certain letters representing snakes and ladders.
+* The board will show where the players are by indicating it using certain letters and numbers.
+* The board will have certain letters representing snakes and ladders. 
 * The ladders will bring the players to a higher number while the snakes will bring them down to a lower number on the game board.
 * The players will be told when it's their turn and will be told what they rolled.
 * When one of the players reaches the end of the board which is 100 they'll be told that they've won.
