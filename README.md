@@ -23,7 +23,8 @@
 * The board will have certain letters representing snakes and ladders.
 * The ladders will bring the players to a higher number while the snakes will bring them down to a lower number on the game board.
 * The players will be told when it's their turn and will be told what they rolled.
-*
+* When one of the players reaches the end of the board which is 100 they'll be told that they've won.
+* The program will ask them if they want to play again.
 
 
 
