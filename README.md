@@ -28,7 +28,7 @@
 
 ### Going furthur
 
-* Adding a computer player that will play vs the user
+* Adding a computer player that will play vs the user. This will only require one player instead of two.
 
 
 
