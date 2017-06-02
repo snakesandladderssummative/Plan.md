@@ -26,5 +26,9 @@
 * When one of the players reaches the end of the board which is 100 they'll be told that they've won.
 * The program will ask them if they want to play again.
 
+### Going furthur
+
+* Adding a computer player that will play vs the user
+
 
 
