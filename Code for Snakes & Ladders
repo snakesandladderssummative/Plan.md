@@ -12,7 +12,7 @@ class SnakesandLadders
     diceRoll ();
     gameBoard ();
   }
-  public static void gameRules () 
+  public static void gameRules () //Method that prints game rules.
   {
     System.out.println ("\tWelcome to Snakes and Ladders!\n");
     System.out.println ("GAME RULES");
@@ -21,10 +21,12 @@ class SnakesandLadders
     System.out.println ("Player 1 will be shown as [P1] and player 2 will be shown as [P2]");
     System.out.println ("Snakes will be shown as [S] and ladders will be shown as [L].");
     System.out.println ("If you land on a snake you will move backwards. If you land on a ladder you'll move forward.");
-    System.out.println ("As you progress through the board it goes from  right to left every  row.");
-    System.out.println ("Once a player reaches 100 they win the game\n");
+    System.out.println ("As you progress through the board the rows will go from right to left..");
+    System.out.println ("Once a player reaches 100 they win the game.");
+    System.out.println ("Good luck!!!\n");
   }
-  public static void diceRoll ()
+  
+  public static void diceRoll () //Method that creates the die's
   {
     Random randomGenerator = new Random();
     int dice,diceChoice;
@@ -40,19 +42,32 @@ class SnakesandLadders
     {
       dice = randomGenerator.nextInt(12)+1 ;    
     }
+    else
+    {
+      System.out.println ("Invalid entry");
+    }
   }
-  public static void gameBoard ()
-  {
-    String [][] board = new String [10][10];
-    int rows = board.length;
+  
+  public static void gameBoard () // Method that prints the game board.
+ {
+    String [][] board = new String [10][10]; // creating a 2-D array that can has 100 elements
+    int rows = board.length; 
     int cols = board[0].length;
     
-    for (int i=0; i<rows; i++)
+    for (int i=0; i<rows; i++) 
     {
-      System.out.println("[]");
       for (int j=0; j<cols; j++)
       {
-        System.out.print ("\t"+board[i][j]);
+        board [i][j]=" "; // Creates spaces for the each element in the board.
+      }
+    }  
+    
+    for (int i=0; i<rows; i++) 
+    {
+      System.out.println("");
+      for (int j=0; j<cols; j++)
+      {
+        System.out.print ("\t[]"+board[i][j]); // Prints the game board.
       }
     }
   }
