@@ -94,7 +94,6 @@ class SnakesandLadders
       {
         posY -= 1; // This will move the Player1, up 1 column on the board using the condition of the if statement above^. 
         
-        
         if (posY % 2 == 0) { // If statement that uses the "modulo operator" to check if player 1's location should be starting from the right side of the board. 
         //  posX = 9; // The position of the player 1 will start at the very right side of the board.
           board[posY][9-((posX+dice)-10)] = ("P1"); // 
@@ -111,12 +110,11 @@ class SnakesandLadders
         }
     }
   }
-  
+ 
     public static void playerTwo () // Method that creates playerTwo and keeps tracks of their moves caused by the dice.
   {
     
   }
-  
   
   public static void gameBoard () // Method used to create the board.
  {
