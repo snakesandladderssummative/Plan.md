@@ -6,69 +6,166 @@
 import java.util.Random;
 class SnakesandLadders
 {
+  public static String [][] board = new String [10][10]; // creating a 2-D array that can has 100 elements.
   public static void main (String args[])
   {
-    gameRules ();
-    diceRoll ();
-    gameBoard ();
+    for (int i=0; i<10; i++) 
+    {
+      for (int j=0; j<10; j++)
+      {
+        board [i][j]=" "; // Creates spaces for each element in the board.
+      }
+    }
+    setSandL (); // Calling S&L method to setup the snakes and ladders on the board.
+    board [9] [0] = "P1"; // Setting the intial location of Player 1.\
+    gameRules(); // gameRules method is on top of the do, while to stop the method from printing 
+    do
+    {
+      gameBoard();
+      playerOne(diceCreation()); // Calls the dice from diceCreation method as it's own variable.
+    }
+    while(board[0][0] != "P1");
   }
+  
   public static void gameRules () //Method that prints game rules.
   {
-    System.out.println ("\tWelcome to Snakes and Ladders!\n");
+  System.out.println ("\tWelcome to Snakes and Ladders!\n");
     System.out.println ("GAME RULES");
     System.out.println ("This game will require ONLY two players, both players will start at 0 on the board.");
     System.out.println ("Before the game starts you have to choose whether or not you want to use 1 die or 2 die ");
-    System.out.println ("Player 1 will be shown as [P1] and player 2 will be shown as [P2]");
+    System.out.println ("Player 1 will be shown as [P1] and player 2 will be shown as [P2]. If a bot is chosen it will be shown as [AI].");
     System.out.println ("Snakes will be shown as [S] and ladders will be shown as [L].");
-    System.out.println ("If you land on a snake you will move backwards. If you land on a ladder you'll move forward.");
-    System.out.println ("As you progress through the board the rows will go from right to left..");
+    System.out.println ("If you land on a snake you will move backwards. If you land on a ladder you'll move forward to the designated Ladder or Snake. Example [L1] goes to [L1].");
+    System.out.println ("As you progress through the board the rows will go from right to left.");
     System.out.println ("Once a player reaches 100 they win the game.");
     System.out.println ("Good luck!!!\n");
   }
   
-  public static void diceRoll () //Method that creates the die's
+ public static int diceCreation() // Method that creates the dice.
   {
     Random randomGenerator = new Random();
-    int dice,diceChoice;
+    int dice=0;
+    String diceChoice;
     
-    System.out.println ("If you want one die please enter 1 if you want two die's please enter 2"); 
-    diceChoice=In.getInt();
+    System.out.println ("\nIf you want one dice please enter \"1\" if you want two die's please enter \"2\"."); 
     
-    if (diceChoice==1)
+    do
     {
-      dice = randomGenerator.nextInt(6)+1 ;  
+      diceChoice = In.getString();
+      
+      if (!(diceChoice.equals("1") || diceChoice.equals("2")))
+      {
+        System.out.println("Invalid Entry");
+      }
+    }while (!(diceChoice.equals("1") || diceChoice.equals("2"))); //
+    
+    if (diceChoice.equals("1"))
+    {
+      dice = randomGenerator.nextInt(6)+1;  // Possible roll can be 1-6.
     }
-    else if (diceChoice==2)
+    else if (diceChoice.equals("2"))
     {
-      dice = randomGenerator.nextInt(12)+1 ;    
+      dice = randomGenerator.nextInt(12)+2;  // Possible roll can be 2-12.  
     }
-    else
+    return dice;
+  }
+  
+  public static void playerOne (int dice) // Method that creates playerOne and keeps tracks of their moves.
+  {
+    int posY = 0; 
+    int posX = 0;
+    
+    for (int i = 0; i < 10; i++)
+    { 
+      for (int j = 0; j < 10; j++)
+      {
+        if (board[i][j].equals("P1"))
+        {
+          posY = i; // Position of player 1 in columns.
+          posX = j; // Position of player 1 in rows.
+          board[i][j] = (" ");
+        }
+      }
+    }
+    setSandL (); // Resets snakes and ladders.
+    System.out.println ("Player 1 has rolled "+dice);                                
     {
-      System.out.println ("Invalid entry");
+      if ((posX+dice)>9) //If statement created to check if the player is out of bounds left or right on the board.
+      {
+        posY -= 1; // This will move the Player1, up 1 column on the board using the condition of the if statement above^. 
+        
+        
+        if (posY % 2 == 0) { // If statement that uses the "modulo operator" to check if player 1's location should be starting from the right side of the board. 
+        //  posX = 9; // The position of the player 1 will start at the very right side of the board.
+          board[posY][9-((posX+dice)-10)] = ("P1"); // 
+        }
+        else 
+        {
+          posX = 0;  
+          board[posY][posX+(dice)] = ("P1"); // When the position of player1 is 0 in a row it will take the dice roll and add to the position of player1. 
+        }
+      }
+        else 
+        {
+          board [posY] [posX+dice]=("P1"); //
+        }
     }
   }
   
-  public static void gameBoard () // Method that prints the game board.
+    public static void playerTwo () // Method that creates playerTwo and keeps tracks of their moves caused by the dice.
+  {
+    
+  }
+  
+  
+  public static void gameBoard () // Method used to create the board.
  {
-    String [][] board = new String [10][10]; // creating a 2-D array that can has 100 elements
-    int rows = board.length; 
-    int cols = board[0].length;
-    
-    for (int i=0; i<rows; i++) 
-    {
-      for (int j=0; j<cols; j++)
-      {
-        board [i][j]=" "; // Creates spaces for the each element in the board.
-      }
-    }  
-    
-    for (int i=0; i<rows; i++) 
+    for (int i=0; i<10; i++) 
     {
       System.out.println("");
-      for (int j=0; j<cols; j++)
+      System.out.println("");
+      for (int j=0; j<10; j++)
       {
-        System.out.print ("\t[]"+board[i][j]); // Prints the game board.
+        System.out.print ("\t["+board[i][j] + "]"); // Method that prints the game board.
       }
     }
+  }
+    
+    public static void setSandL () // Method that creates snakes and ladders.
+  {
+      // Declaring locations of snakes and ladders on the boards using the elements of the 2-D array.
+    board [0] [0] = "Finish"; 
+    board [9] [7] = "S1";
+    board [8] [3] = "S1";
+    board [8] [1] = "S2";
+    board [3] [1] = "S2";
+    board [7] [3] = "S3";
+    board [1] [6] = "S3";
+    board [6] [6] = "S4";
+    board [4] [6] = "S4";
+    board [4] [0] = "S5";
+    board [3] [3] = "S5";
+    board [2] [7] = "S6";
+    board [0] [7] = "S6";
+    board [2] [5] = "S7";
+    board [0] [5] = "S7";
+    board [2] [2] = "S8";
+    board [0] [1] = "S8";
+    board [9] [4] = "L1";
+    board [8] [7] = "L1";
+    board [9] [8] = "L2";
+    board [6] [9] = "L2";
+    board [8] [0] = "L3";
+    board [6] [2] = "L3";
+    board [7] [7] = "L4";
+    board [1] [3] = "L4";
+    board [6] [0] = "L5";
+    board [4] [1] = "L5";
+    board [4] [9] = "L6";
+    board [3] [6] = "L6";
+    board [3] [2] = "L7";
+    board [1] [0] = "L7";
+    board [2] [9] = "L8";
+    board [0] [9] = "L8";
   }
 }
