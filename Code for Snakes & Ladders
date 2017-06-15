@@ -6,6 +6,7 @@
 import java.util.Random;
 class SnakesandLadders
 {
+  public static String diceChoice=" "; // public due to it needing to be acessed by multiple methods.
   public static String [][] board = new String [10][10]; // creating a 2-D array that can has 100 elements.
   public static void main (String args[])
   {
@@ -17,14 +18,17 @@ class SnakesandLadders
       }
     }
     setSandL (); // Calling S&L method to setup the snakes and ladders on the board.
-    board [9] [0] = "P1"; // Setting the intial location of Player 1.\
+    board [9] [0] = "P1"; // Setting the intial location of Player 1.
     gameRules(); // gameRules method is on top of the do, while to stop the method from printing 
+    
     do
     {
-      gameBoard();
+      gameBoard(); // creates board.
       playerOne(diceCreation()); // Calls the dice from diceCreation method as it's own variable.
+      System.out.println ("\nPress the \"Enter\" key to continue.");
+      String continueRoll = In.getString ();
     }
-    while(board[0][0] != "P1");
+    while(board[0][0] != "P1"); // when player one reaches 100 on the board.
   }
   
   public static void gameRules () //Method that prints game rules.
@@ -45,20 +49,17 @@ class SnakesandLadders
   {
     Random randomGenerator = new Random();
     int dice=0;
-    String diceChoice;
     
-    System.out.println ("\nIf you want one dice please enter \"1\" if you want two die's please enter \"2\"."); 
-    
-    do
+    if (!(diceChoice.equals("1") || diceChoice.equals("2"))) // if user input is not = 1 or 2.
     {
+       System.out.println ("\nIf you want one dice please enter \"1\" if you want two die's please enter \"2\"."); 
       diceChoice = In.getString();
       
       if (!(diceChoice.equals("1") || diceChoice.equals("2")))
       {
         System.out.println("Invalid Entry");
       }
-    }while (!(diceChoice.equals("1") || diceChoice.equals("2"))); //
-    
+    }
     if (diceChoice.equals("1"))
     {
       dice = randomGenerator.nextInt(6)+1;  // Possible roll can be 1-6.
@@ -106,7 +107,7 @@ class SnakesandLadders
       }
         else 
         {
-          board [posY] [posX+dice]=("P1"); //
+          board [posY] [posX+dice]=("P1"); // adds to to position of player1.
         }
     }
   }
